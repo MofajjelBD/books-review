@@ -2,11 +2,11 @@ import { Link } from "react-router-dom";
 import { FaRegStar } from "react-icons/fa";
 import PropTypes from "prop-types";
 const Book = ({ BookData }) => {
-  const { image, bookName, author, category, rating, tags } = BookData;
+  const { bookId, image, bookName, author, category, rating, tags } = BookData;
   return (
     <>
       <Link
-        to="books/:1"
+        to={`books/${bookId}`}
         className="card bg-base-100 w-[374px] shadow-xl border border-gray rounded-3xl dark:bg-slate-800"
       >
         <figure className="px-6 py-6 w-full h-full !items-start">
@@ -24,12 +24,6 @@ const Book = ({ BookData }) => {
                 {tags}
               </span>
             ))}
-            <span className="text-base text-green-500 font-medium font-WorkSans rounded-full py-2 px-5 bg-green-50">
-              Young Adult
-            </span>
-            <span className="text-base text-green-500 font-medium font-WorkSans rounded-full py-2 px-5 bg-green-50">
-              Identity
-            </span>
           </div>
           <h2 className="card-title text-2xl font-bold font-Playfair text-Primary">
             {bookName}
