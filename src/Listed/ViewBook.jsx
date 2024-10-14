@@ -1,5 +1,12 @@
 import { useLoaderData, useParams } from "react-router-dom";
 import PropTypes from "prop-types";
+import {
+  getStorageBookApp,
+  removeApp,
+  saveApp,
+} from "../uitility/localStorage.js";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const ViewBook = () => {
   const books = useLoaderData();
@@ -19,8 +26,74 @@ const ViewBook = () => {
     review,
   } = book;
 
+  // Add button value
+  const readStore = "Read";
+  const WishlistStore = "Wishlist";
+
+  // handle add to local storage to read
+  const handleAddToBook = (id, saveStore) => {
+    const storeData = getStorageBookApp(WishlistStore);
+    const existsWishlist = storeData.find((storeData) => storeData == id);
+    if (existsWishlist) {
+      removeApp(id, WishlistStore);
+      forTost(saveStore);
+      saveApp(id, saveStore);
+    } else {
+      forTost(saveStore);
+      saveApp(id, saveStore);
+    }
+  };
+
+  // handle add to local storage to WishList
+  const handleStoreToBook = (id, saveStore) => {
+    const storeData = getStorageBookApp(readStore);
+    const existsRead = storeData.find((storeData) => storeData == id);
+    if (existsRead) {
+      toast.error(`You book already added to ${readStore}`, {
+        position: "top-right",
+        autoClose: 3600,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+    } else {
+      forTost(saveStore);
+      saveApp(id, saveStore);
+    }
+  };
+
+  // Tost for both read & wishlist
+  const forTost = (saveStore) => {
+    const storeData = getStorageBookApp(saveStore);
+    const exists = storeData.find((storeData) => storeData == id);
+    if (exists) {
+      toast.error(`You book already added to ${saveStore}`, {
+        position: "top-right",
+        autoClose: 3600,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+    } else {
+      toast.success(`Book read added successful ${saveStore}`, {
+        position: "top-right",
+        autoClose: 3600,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+    }
+  };
+
   return (
     <div className="max-w-[1202px] mx-auto px-4 mt-8">
+      <ToastContainer></ToastContainer>
       <div className="grid grid-cols-2 gap-12">
         <div className="col-span-1 grid">
           <div className="bg-base-200 rounded-2xl w-full lg:p-20 justify-center flex">
@@ -100,11 +173,17 @@ const ViewBook = () => {
             </table>
           </div>
           <div className="flex gap-4">
-            <a className="btn font-WorkSans text-Primary text-opacity-100 font-semibold text-lg border border-Primary border-opacity-30 bg-transparent px-5">
-              Read
+            <a
+              onClick={() => handleAddToBook(id, readStore)}
+              className="btn font-WorkSans text-Primary text-opacity-100 font-semibold text-lg border border-Primary border-opacity-30 bg-transparent px-5"
+            >
+              {readStore}
             </a>
-            <a className="btn font-WorkSans text-white text-opacity-100 font-semibold text-lg border border-transparent bg-info px-5 hover:text-Primary">
-              Wishlist
+            <a
+              onClick={() => handleStoreToBook(id, WishlistStore)}
+              className="btn font-WorkSans text-white text-opacity-100 font-semibold text-lg border border-transparent bg-info px-5 hover:text-Primary"
+            >
+              {WishlistStore}
             </a>
           </div>
         </div>
