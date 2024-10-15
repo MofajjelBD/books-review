@@ -1,7 +1,25 @@
 import { IoIosArrowDown } from "react-icons/io";
+import { useLoaderData } from "react-router-dom";
+import { getStorageBookApp } from "../utilities/localStorage";
+import { useEffect, useState } from "react";
 import { BookRead } from "./BookRead";
 
 export const Listed = () => {
+  const books = useLoaderData();
+  const [readData, setReadData] = useState([]);
+  useEffect(() => {
+    const storeBook = getStorageBookApp("Read");
+    const storeBookInt = Array.isArray(storeBook)
+      ? storeBook.map((str) => parseInt(str))
+      : [];
+    if (Array.isArray(books) && books.length > 0) {
+      const bookStore = books.filter((book) =>
+        storeBookInt.includes(book.bookId)
+      );
+      setReadData(bookStore);
+    }
+  }, [books]);
+
   return (
     <div className="max-w-[1202px] mx-auto px-4 mt-8">
       <h2 className="font-WorkSans text-3xl text-Primary font-bold text-center py-6 bg-base-200 rounded-2xl">
@@ -46,10 +64,9 @@ export const Listed = () => {
           className="tab-content bg-base-100 border-base-300 border-0 border-t-[1px]"
         >
           <div className="py-8 gap-6 grid">
-            <BookRead></BookRead>
-            <BookRead></BookRead>
-            <BookRead></BookRead>
-            <BookRead></BookRead>
+            {readData.map((readData) => (
+              <BookRead key={readData.bookId} readData={readData}></BookRead>
+            ))}
           </div>
         </div>
         <input

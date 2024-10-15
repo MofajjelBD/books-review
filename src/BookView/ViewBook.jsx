@@ -4,15 +4,17 @@ import {
   getStorageBookApp,
   removeApp,
   saveApp,
-} from "../uitility/localStorage.js";
+} from "../utilities/localStorage.js";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-const ViewBook = () => {
+export const ViewBook = () => {
   const books = useLoaderData();
   const { id } = useParams();
   const idInt = parseInt(id);
-  const book = books.find((book) => book.bookId === idInt);
+  const book = Array.isArray(books)
+    ? books.find((book) => book.bookId === idInt)
+    : null;
   const {
     image,
     bookName,
@@ -49,7 +51,7 @@ const ViewBook = () => {
     const storeData = getStorageBookApp(readStore);
     const existsRead = storeData.find((storeData) => storeData == id);
     if (existsRead) {
-      toast.error(`You book already added to ${readStore}`, {
+      toast.error(`Book already added to ${readStore}`, {
         position: "top-right",
         autoClose: 3600,
         hideProgressBar: false,
@@ -69,7 +71,7 @@ const ViewBook = () => {
     const storeData = getStorageBookApp(saveStore);
     const exists = storeData.find((storeData) => storeData == id);
     if (exists) {
-      toast.error(`You book already added to ${saveStore}`, {
+      toast.error(`Book already added to ${saveStore}`, {
         position: "top-right",
         autoClose: 3600,
         hideProgressBar: false,
@@ -79,7 +81,7 @@ const ViewBook = () => {
         progress: undefined,
       });
     } else {
-      toast.success(`Book read added successful ${saveStore}`, {
+      toast.success(`Book added successful ${saveStore}`, {
         position: "top-right",
         autoClose: 3600,
         hideProgressBar: false,
@@ -194,4 +196,3 @@ const ViewBook = () => {
 ViewBook.propTypes = {
   book: PropTypes.any,
 };
-export default ViewBook;
