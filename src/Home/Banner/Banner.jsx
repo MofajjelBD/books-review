@@ -7,7 +7,7 @@ const Banner = () => {
         <div className="grid grid-cols-12 gap-4 lg:p-28 p-6">
           <div className="col-span-12 lg:col-span-7 items-center flex">
             <div className="items-center">
-              <h1 className="text-3xl font-bold sm:text-[56px] font-Playfair text-Primary text-opacity-100 dark:text-opacity-100 font-Mulish leading-10 sm:leading-[84px]">
+              <h1 className="text-3xl font-bold sm:text-[56px] font-Playfair text-Primary dark:text-Primary-dark text-opacity-100 dark:text-opacity-100 font-Mulish leading-10 sm:leading-[84px]">
                 Books to freshen up your bookshelf
               </h1>
               <div className="">

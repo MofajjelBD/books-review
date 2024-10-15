@@ -4,8 +4,13 @@ export default {
   theme: {
     extend: {
       colors: {
-        // Custom colors here
-        Primary: "#131313",
+        // // Custom colors here
+        Primary: {
+          light: "#06b6d4",
+          DEFAULT: "#131313",
+          dark: "#a6adbb",
+        },
+        // Primary: "#0c0a09",
         "brand-red": "#dc2626",
         "custom-green": {
           light: "#6ee7b7",

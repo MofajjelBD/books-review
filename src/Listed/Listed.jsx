@@ -1,12 +1,23 @@
 import { IoIosArrowDown } from "react-icons/io";
-import { useLoaderData } from "react-router-dom";
+// import { useLoaderData } from "react-router-dom";
 import { getStorageBookApp } from "../utilities/localStorage";
 import { useEffect, useState } from "react";
 import { BookRead } from "./BookRead";
 
 export const Listed = () => {
-  const books = useLoaderData();
+  // const books = useLoaderData();
+  const [books, setBookData] = useState([]);
+  useEffect(() => {
+    fetch("BookData.json")
+      .then((response) => {
+        return response.json();
+      })
+      .then((data) => {
+        setBookData(data);
+      });
+  }, []);
   const [readData, setReadData] = useState([]);
+  const [readDataWise, setReadDataWise] = useState([]);
   useEffect(() => {
     const storeBook = getStorageBookApp("Read");
     const storeBookInt = Array.isArray(storeBook)
@@ -18,11 +29,21 @@ export const Listed = () => {
       );
       setReadData(bookStore);
     }
+    const storeBookWise = getStorageBookApp("Wishlist");
+    const storeBookWiseInt = Array.isArray(storeBookWise)
+      ? storeBookWise.map((str) => parseInt(str))
+      : [];
+    if (Array.isArray(books) && books.length > 0) {
+      const bookStoreWise = books.filter((book) =>
+        storeBookWiseInt.includes(book.bookId)
+      );
+      setReadDataWise(bookStoreWise);
+    }
   }, [books]);
 
   return (
     <div className="max-w-[1202px] mx-auto px-4 mt-8">
-      <h2 className="font-WorkSans text-3xl text-Primary font-bold text-center py-6 bg-base-200 rounded-2xl">
+      <h2 className="font-WorkSans text-3xl text-Primary dark:text-Primary-dark font-bold text-center py-6 bg-base-200 rounded-2xl">
         Books
       </h2>
       <div className="text-center my-6">
@@ -55,7 +76,7 @@ export const Listed = () => {
           type="radio"
           name="my_tabs_2"
           role="tab"
-          className="tab h-auto after:py-2 after:px-4 after:text-lg after:font-WorkSans text-opacity-50 text-Primary focus:!text-opacity-80"
+          className="tab h-auto after:py-2 after:px-4 after:text-lg after:font-WorkSans text-opacity-50 text-Primary dark:text-Primary-dark focus:!text-opacity-80"
           aria-label="Read Books"
           defaultChecked
         />
@@ -73,14 +94,21 @@ export const Listed = () => {
           type="radio"
           name="my_tabs_2"
           role="tab"
-          className="tab h-auto after:py-2 after:px-4 after:text-lg after:font-WorkSans text-opacity-50 text-Primary focus:!text-opacity-80"
+          className="tab h-auto after:py-2 after:px-4 after:text-lg after:font-WorkSans text-opacity-50 text-Primary dark:text-Primary-dark focus:!text-opacity-80"
           aria-label="Wishlist Books"
         />
         <div
           role="tabpanel"
           className="tab-content bg-base-100 border-base-300 border-0 border-t-[1px]"
         >
-          Empty
+          <div className="py-8 gap-6 grid">
+            {readDataWise.map((readDataWise) => (
+              <BookRead
+                key={readDataWise.bookId}
+                readData={readDataWise}
+              ></BookRead>
+            ))}
+          </div>
         </div>
       </div>
     </div>

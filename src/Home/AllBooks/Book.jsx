@@ -25,18 +25,18 @@ const Book = ({ BookData }) => {
               </span>
             ))}
           </div>
-          <h2 className="card-title text-2xl font-bold font-Playfair text-Primary">
+          <h2 className="card-title text-2xl font-bold font-Playfair text-Primary dark:text-Primary-dark">
             {bookName}
           </h2>
-          <p className="text-base font-medium font-WorkSans text-Primary text-opacity-80">
+          <p className="text-base font-medium font-WorkSans text-Primary dark:text-Primary-dark text-opacity-80">
             By : {author}
           </p>
           <div className="mt-4 border-dashed border-b-2"></div>
           <div className="flex justify-between flex-wrap py-3">
-            <span className="text-base font-medium font-WorkSans text-Primary text-opacity-80 flex gap-2">
+            <span className="text-base font-medium font-WorkSans text-Primary dark:text-Primary-dark text-opacity-80 flex gap-2">
               {category}
             </span>
-            <span className="text-base font-medium font-WorkSans text-Primary text-opacity-80 flex items-center gap-2">
+            <span className="text-base font-medium font-WorkSans text-Primary dark:text-Primary-dark text-opacity-80 flex items-center gap-2">
               {rating}
               <FaRegStar />
             </span>

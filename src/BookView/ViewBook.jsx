@@ -1,4 +1,4 @@
-import { useLoaderData, useParams } from "react-router-dom";
+import { useLoaderData, useParams, useLocation } from "react-router-dom";
 import PropTypes from "prop-types";
 import {
   getStorageBookApp,
@@ -7,26 +7,25 @@ import {
 } from "../utilities/localStorage.js";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { useEffect, useState } from "react";
 
 export const ViewBook = () => {
   const books = useLoaderData();
   const { id } = useParams();
+  const location = useLocation();
   const idInt = parseInt(id);
-  const book = Array.isArray(books)
-    ? books.find((book) => book.bookId === idInt)
-    : null;
-  const {
-    image,
-    bookName,
-    author,
-    category,
-    rating,
-    tags,
-    totalPages,
-    publisher,
-    yearOfPublishing,
-    review,
-  } = book;
+
+  const [book, setBook] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  // Fetch the book based on the dynamic id
+  useEffect(() => {
+    if (Array.isArray(books)) {
+      const foundBook = books.find((book) => book.bookId === idInt);
+      setBook(foundBook);
+      setLoading(false); // Stop loading when book is found
+    }
+  }, [books, idInt, location]);
 
   // Add button value
   const readStore = "Read";
@@ -92,6 +91,22 @@ export const ViewBook = () => {
       });
     }
   };
+  if (loading || !book) {
+    return <div>Loading...</div>;
+  }
+
+  const {
+    image,
+    bookName,
+    author,
+    category,
+    rating,
+    tags,
+    totalPages,
+    publisher,
+    yearOfPublishing,
+    review,
+  } = book;
 
   return (
     <div className="max-w-[1202px] mx-auto px-4 mt-8">
@@ -103,27 +118,27 @@ export const ViewBook = () => {
           </div>
         </div>
         <div className="col-span-1 grid items-center">
-          <h2 className="card-title text-2xl font-bold font-Playfair text-Primary">
+          <h2 className="card-title text-2xl font-bold font-Playfair text-Primary dark:text-Primary-dark">
             {bookName}
           </h2>
-          <p className="text-base font-medium font-WorkSans text-Primary text-opacity-80 py-2">
+          <p className="text-base font-medium font-WorkSans text-Primary dark:text-Primary-dark text-opacity-80 py-2">
             {author}
           </p>
           <div className="py-3 border-y my-1">
-            <span className="text-base font-medium font-WorkSans text-Primary text-opacity-80 flex gap-2">
+            <span className="text-base font-medium font-WorkSans text-Primary dark:text-Primary-dark text-opacity-80 flex gap-2">
               {category}
             </span>
           </div>
           <div className="py-2">
-            <p className="text-base font-WorkSans text-Primary leading-6 text-opacity-70">
-              <span className="font-bold text-base font-WorkSans text-Primary">
+            <p className="text-base font-WorkSans text-Primary dark:text-Primary-dark leading-6 text-opacity-70">
+              <span className="font-bold text-base font-WorkSans text-Primary dark:text-Primary-dark">
                 Review :
               </span>
               {review}
             </p>
           </div>
           <div className="flex gap-4 flex-wrap py-2">
-            <strong className="font-bold text-base leading-7 font-WorkSans text-Primary items-center flex">
+            <strong className="font-bold text-base leading-7 font-WorkSans text-Primary dark:text-Primary-dark items-center flex">
               Tag
             </strong>
             {tags.map((tags, Index) => (
@@ -177,13 +192,13 @@ export const ViewBook = () => {
           <div className="flex gap-4">
             <a
               onClick={() => handleAddToBook(id, readStore)}
-              className="btn font-WorkSans text-Primary text-opacity-100 font-semibold text-lg border border-Primary border-opacity-30 bg-transparent px-5"
+              className="btn font-WorkSans text-Primary dark:text-Primary-dark text-opacity-100 font-semibold text-lg border border-Primary dark:border-Primary-dark border-opacity-30 bg-transparent px-5"
             >
               {readStore}
             </a>
             <a
               onClick={() => handleStoreToBook(id, WishlistStore)}
-              className="btn font-WorkSans text-white text-opacity-100 font-semibold text-lg border border-transparent bg-info px-5 hover:text-Primary"
+              className="btn font-WorkSans text-white text-opacity-100 font-semibold text-lg border border-transparent bg-info px-5 hover:text-Primary dark:hover:text-Primary-dark"
             >
               {WishlistStore}
             </a>

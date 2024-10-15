@@ -24,14 +24,14 @@ export const BookRead = ({ readData }) => {
         </div>
       </figure>
       <div className="card-body py-6 ps-0 px-6 justify-start">
-        <h2 className="card-title text-2xl font-bold font-Playfair text-Primary">
+        <h2 className="card-title text-2xl font-bold font-Playfair text-Primary dark:text-Primary-dark">
           {bookName}
         </h2>
-        <p className="text-base font-medium font-WorkSans text-Primary text-opacity-80">
+        <p className="text-base font-medium font-WorkSans text-Primary dark:text-Primary-dark text-opacity-80">
           By : {author}
         </p>
         <div className="flex gap-4 flex-wrap">
-          <strong className="font-bold text-base leading-7 font-WorkSans text-Primary items-center flex">
+          <strong className="font-bold text-base leading-7 font-WorkSans text-Primary dark:text-Primary-dark items-center flex">
             Tag
           </strong>
           {tags.map((tags, Index) => (
@@ -42,24 +42,24 @@ export const BookRead = ({ readData }) => {
               {tags}
             </span>
           ))}
-          <span className="text-base font-WorkSans text-Primary text-opacity-80 flex items-center gap-2">
+          <span className="text-base font-WorkSans text-Primary dark:text-Primary-dark text-opacity-80 flex items-center gap-2">
             <GrLocation /> Year of Publishing: {yearOfPublishing}
           </span>
         </div>
         <div className="flex gap-4 flex-wrap mt-1">
-          <span className="text-base font-WorkSans text-Primary text-opacity-80 flex items-center gap-2">
+          <span className="text-base font-WorkSans text-Primary dark:text-Primary-dark text-opacity-80 flex items-center gap-2">
             <HiOutlineUsers /> Publisher: {publisher}
           </span>
-          <span className="text-base font-WorkSans text-Primary text-opacity-80 flex items-center gap-2">
+          <span className="text-base font-WorkSans text-Primary dark:text-Primary-dark text-opacity-80 flex items-center gap-2">
             <HiOutlineDocumentChartBar /> Page {totalPages}
           </span>
         </div>
         <div className="my-2 border-b-[1px]"></div>
         <div className="flex gap-4 flex-wrap">
-          <span className="text-base text-blue-500 font-WorkSans rounded-full py-2 px-5 bg-blue-50">
+          <span className="text-base content-center text-blue-500 font-WorkSans rounded-full py-2 px-5 bg-blue-50">
             Category: {category}
           </span>
-          <span className="text-base text-yellow-500 font-WorkSans rounded-full py-2 px-5 bg-yellow-50">
+          <span className="text-base content-center text-yellow-500 font-WorkSans rounded-full py-2 px-5 bg-yellow-50">
             Rating: {rating}
           </span>
           <Link

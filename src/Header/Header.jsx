@@ -4,7 +4,7 @@ export const Header = () => {
   const activeIs = ({ isActive }) =>
     isActive
       ? "active:bg-transparent font-WorkSans text-green-500 font-semibold text-lg border-green-500 border focus:text-green-500 focus:bg-transparent focus:hover:bg-base-200 hover:bg-base-200 active:!bg-transparent"
-      : "active:!bg-transparent font-WorkSans text-Primary text-opacity-80 font-semibold text-lg border border-transparent";
+      : "active:!bg-transparent font-WorkSans text-Primary dark:text-Primary-dark text-opacity-80 font-semibold text-lg border border-transparent";
   const links = (
     <>
       <li>
@@ -57,7 +57,7 @@ export const Header = () => {
                 {links}
               </ul>
             </div>
-            <a className="btn btn-ghost font-WorkSans text-3xl text-Primary font-bold px-0">
+            <a className="btn btn-ghost font-WorkSans text-3xl text-Primary dark:text-Primary-dark font-bold px-0">
               Book Vibe
             </a>
           </div>

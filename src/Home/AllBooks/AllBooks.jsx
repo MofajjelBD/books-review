@@ -14,7 +14,7 @@ export const AllBooks = () => {
   }, []);
   return (
     <div className="mt-24">
-      <h2 className="font-bold text-4xl text-Primary font-Playfair text-center">
+      <h2 className="font-bold text-4xl text-Primary dark:text-Primary-dark font-Playfair text-center">
         Books
       </h2>
       <div className="flex flex-wrap justify-center gap-6 mt-8">
