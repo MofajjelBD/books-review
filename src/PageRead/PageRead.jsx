@@ -72,10 +72,10 @@ export const PageRead = () => {
   }, []);
   return (
     <div className="max-w-[1202px] mx-auto px-4 mt-8">
-      <div className="bg-base-200 rounded-2xl p-12">
+      <div className="bg-base-200 rounded-2xl lg:p-12">
         <div id="chartContainer">
           <BarChart
-            className="w-full"
+            className="w-full mx-auto"
             width={WidthBar}
             height={(WidthBar / 6) * 3}
             data={readData}

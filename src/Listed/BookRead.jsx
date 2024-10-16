@@ -17,13 +17,13 @@ export const BookRead = ({ readData }) => {
     rating,
   } = readData;
   return (
-    <div className="card bg-base-100 w-full border border-gray rounded-2xl dark:bg-slate-800 flex-row">
+    <div className="card bg-base-100 w-full border border-gray rounded-2xl dark:bg-slate-800 flex-colum lg:flex-row">
       <figure className="px-6 py-6 ">
-        <div className="bg-base-200 rounded-2xl h-[230px] w-[230px] p-8 justify-center flex">
+        <div className="bg-base-200 rounded-2xl h-[230px] w-full lg:w-[230px] p-8 justify-center flex">
           <img className="h-full w-auto" src={image}></img>
         </div>
       </figure>
-      <div className="card-body py-6 ps-0 px-6 justify-start">
+      <div className="card-body py-6 lg:ps-0 px-6 justify-start">
         <h2 className="card-title text-2xl font-bold font-Playfair text-Primary dark:text-Primary-dark">
           {bookName}
         </h2>

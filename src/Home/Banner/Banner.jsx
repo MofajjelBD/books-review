@@ -13,14 +13,14 @@ const Banner = () => {
               <div className="">
                 <Link
                   to="/listed"
-                  className="mt-12 btn font-WorkSans text-white text-opacity-100 font-bold text-xl border border-transparent bg-green-500 px-5 hover:bg-green-500"
+                  className="mt-12 btn font-WorkSans text-white text-opacity-100 font-bold text-base md:text-xl border border-transparent bg-green-500 px-5 hover:bg-green-500"
                 >
                   View The List
                 </Link>
               </div>
             </div>
           </div>
-          <div className="col-span-12 lg:col-span-5 items-center justify-end flex">
+          <div className="col-span-12 lg:col-span-5  items-center justify-center lg:justify-end flex">
             <img src={BannerImage} alt="Image for banner" />
           </div>
         </div>

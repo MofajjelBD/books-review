@@ -112,12 +112,12 @@ export const ViewBook = () => {
     <div className="max-w-[1202px] mx-auto px-4 mt-8">
       <ToastContainer></ToastContainer>
       <div className="grid grid-cols-2 gap-12">
-        <div className="col-span-1 grid">
-          <div className="bg-base-200 rounded-2xl w-full lg:p-20 justify-center flex">
+        <div className="col-span-2 md:col-span-1 grid">
+          <div className="bg-base-200 rounded-2xl w-full lg:p-20 py-8 justify-center flex">
             <img className="h-full w-auto" src={image}></img>
           </div>
         </div>
-        <div className="col-span-1 grid items-center">
+        <div className="col-span-2 md:col-span-1 grid items-center">
           <h2 className="card-title text-2xl font-bold font-Playfair text-Primary dark:text-Primary-dark">
             {bookName}
           </h2>
@@ -138,7 +138,7 @@ export const ViewBook = () => {
             </p>
           </div>
           <div className="flex gap-4 flex-wrap py-2">
-            <strong className="font-bold text-base leading-7 font-WorkSans text-Primary dark:text-Primary-dark items-center flex">
+            <strong className="font-bold text-base leading-7 font-WorkSans text-Primary dark:text-Primary-dark items-center w-full md:w-auto flex">
               Tag
             </strong>
             {tags.map((tags, Index) => (

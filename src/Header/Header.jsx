@@ -3,8 +3,8 @@ import { NavLink } from "react-router-dom";
 export const Header = () => {
   const activeIs = ({ isActive }) =>
     isActive
-      ? "active:bg-transparent font-WorkSans text-green-500 font-semibold text-lg border-green-500 border focus:text-green-500 focus:bg-transparent focus:hover:bg-base-200 hover:bg-base-200 active:!bg-transparent"
-      : "active:!bg-transparent font-WorkSans text-Primary dark:text-Primary-dark text-opacity-80 font-semibold text-lg border border-transparent";
+      ? "px-1 xl:px-4 active:bg-transparent font-WorkSans text-green-500 font-semibold text-base xl:text-lg border-green-500 border focus:text-green-500 focus:bg-transparent focus:hover:bg-base-200 hover:bg-base-200 active:!bg-transparent"
+      : "px-1 xl:px-4 active:!bg-transparent font-WorkSans text-Primary dark:text-Primary-dark text-opacity-80 font-semibold text-base xl:text-lg border border-transparent";
   const links = (
     <>
       <li>
@@ -20,6 +20,16 @@ export const Header = () => {
       <li>
         <NavLink className={activeIs} to="/read">
           Pages to Read
+        </NavLink>
+      </li>
+      <li>
+        <NavLink className={activeIs} to="/about">
+          About
+        </NavLink>
+      </li>
+      <li>
+        <NavLink className={activeIs} to="/contact">
+          Contact
         </NavLink>
       </li>
     </>
@@ -55,6 +65,14 @@ export const Header = () => {
                 className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow"
               >
                 {links}
+                <div className="block sm:hidden">
+                  <a className="btn font-WorkSans text-white text-opacity-100 font-semibold text-base border border-transparent bg-green-500 w-full hover:bg-green-500 my-2">
+                    Sing In
+                  </a>
+                  <a className="btn font-WorkSans text-white text-opacity-100 font-semibold text-base border border-transparent bg-info w-full hover:bg-info">
+                    Sing Up
+                  </a>
+                </div>
               </ul>
             </div>
             <a className="btn btn-ghost font-WorkSans text-3xl text-Primary dark:text-Primary-dark font-bold px-0">
@@ -64,7 +82,7 @@ export const Header = () => {
           <div className="navbar-center hidden lg:flex">
             <ul className="menu menu-horizontal px-1 py-0 gap-2">{links}</ul>
           </div>
-          <div className="navbar-end gap-4">
+          <div className="navbar-end gap-4 hidden sm:flex">
             <a className="btn font-WorkSans text-white text-opacity-100 font-semibold text-lg border border-transparent bg-green-500 px-5 hover:bg-green-500">
               Sing In
             </a>

@@ -17,7 +17,10 @@ export const Listed = () => {
       });
   }, []);
   const [readData, setReadData] = useState([]);
+  const [displayData, setDisplayData] = useState([]);
+
   const [readDataWise, setReadDataWise] = useState([]);
+  const [displayDataWise, setDisplayDataWise] = useState([]);
   useEffect(() => {
     const storeBook = getStorageBookApp("Read");
     const storeBookInt = Array.isArray(storeBook)
@@ -28,6 +31,7 @@ export const Listed = () => {
         storeBookInt.includes(book.bookId)
       );
       setReadData(bookStore);
+      setDisplayData(bookStore);
     }
     const storeBookWise = getStorageBookApp("Wishlist");
     const storeBookWiseInt = Array.isArray(storeBookWise)
@@ -38,9 +42,25 @@ export const Listed = () => {
         storeBookWiseInt.includes(book.bookId)
       );
       setReadDataWise(bookStoreWise);
+      setDisplayDataWise(bookStoreWise);
     }
   }, [books]);
 
+  const [ascending, setAscending] = useState(true);
+  const [ascendingWise, setAscendingWise] = useState(true);
+
+  const handleDisplayBook = (filter) => {
+    const sortedItems = [...readData].sort((a, b) =>
+      ascending ? a[filter] - b[filter] : b[filter] - a[filter]
+    );
+    setDisplayData(sortedItems);
+    setAscending(!ascending);
+    const sortedItemsWise = [...readDataWise].sort((a, b) =>
+      ascendingWise ? a[filter] - b[filter] : b[filter] - a[filter]
+    );
+    setDisplayDataWise(sortedItemsWise);
+    setAscendingWise(!ascendingWise);
+  };
   return (
     <div className="max-w-[1202px] mx-auto px-4 mt-8">
       <h2 className="font-WorkSans text-3xl text-Primary dark:text-Primary-dark font-bold text-center py-6 bg-base-200 rounded-2xl">
@@ -60,13 +80,28 @@ export const Listed = () => {
             className="dropdown-content menu bg-base-100 rounded-lg z-[1] grow p-1 shadow !flex-row"
           >
             <li className="grow">
-              <a className="justify-center px-2 py-1">Rating</a>
+              <a
+                onClick={() => handleDisplayBook("rating")}
+                className="justify-center px-2 py-1"
+              >
+                Rating
+              </a>
             </li>
             <li className="grow">
-              <a className="justify-center px-2 py-1">Number of pages</a>
+              <a
+                onClick={() => handleDisplayBook("totalPages")}
+                className="justify-center px-2 py-1"
+              >
+                Number of pages
+              </a>
             </li>
             <li className="grow">
-              <a className="justify-center px-2 py-1">Publisher year</a>
+              <a
+                onClick={() => handleDisplayBook("yearOfPublishing")}
+                className="justify-center px-2 py-1"
+              >
+                Publisher year
+              </a>
             </li>
           </ul>
         </div>
@@ -85,8 +120,11 @@ export const Listed = () => {
           className="tab-content bg-base-100 border-base-300 border-0 border-t-[1px]"
         >
           <div className="py-8 gap-6 grid">
-            {readData.map((readData) => (
-              <BookRead key={readData.bookId} readData={readData}></BookRead>
+            {displayData.map((displayData) => (
+              <BookRead
+                key={displayData.bookId}
+                readData={displayData}
+              ></BookRead>
             ))}
           </div>
         </div>
@@ -102,10 +140,10 @@ export const Listed = () => {
           className="tab-content bg-base-100 border-base-300 border-0 border-t-[1px]"
         >
           <div className="py-8 gap-6 grid">
-            {readDataWise.map((readDataWise) => (
+            {displayDataWise.map((displayDataWise) => (
               <BookRead
-                key={readDataWise.bookId}
-                readData={readDataWise}
+                key={displayDataWise.bookId}
+                readData={displayDataWise}
               ></BookRead>
             ))}
           </div>
