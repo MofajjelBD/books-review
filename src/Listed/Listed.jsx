@@ -3,19 +3,10 @@ import { IoIosArrowDown } from "react-icons/io";
 import { getStorageBookApp } from "../utilities/localStorage";
 import { useEffect, useState } from "react";
 import { BookRead } from "./BookRead";
+import { useLoaderData } from "react-router-dom";
 
 export const Listed = () => {
-  // const books = useLoaderData();
-  const [books, setBookData] = useState([]);
-  useEffect(() => {
-    fetch("BookData.json")
-      .then((response) => {
-        return response.json();
-      })
-      .then((data) => {
-        setBookData(data);
-      });
-  }, []);
+  const books = useLoaderData();
   const [readData, setReadData] = useState([]);
   const [displayData, setDisplayData] = useState([]);
 

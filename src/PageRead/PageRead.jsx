@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import { BarChart, Bar, Cell, XAxis, YAxis, CartesianGrid } from "recharts";
 // import { useLoaderData } from "react-router-dom";
 import { getStorageBookApp } from "../utilities/localStorage";
+import { useLoaderData } from "react-router-dom";
 
 const colors = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042", "red", "pink"];
 
@@ -31,19 +32,21 @@ TriangleBar.propTypes = {
   height: PropTypes.number,
 };
 export const PageRead = () => {
-  // const books = useLoaderData([]);
-  const [books, setBookData] = useState([]);
-  useEffect(() => {
-    fetch("BookData.json")
-      .then((response) => {
-        return response.json();
-      })
-      .then((data) => {
-        setBookData(data);
-      });
-  }, []);
+  const books = useLoaderData([]);
   const [WidthBar, setWidthBar] = useState(0);
   const [readData, setReadData] = useState([]);
+
+  useEffect(() => {
+    const updateWidth = () => {
+      const containerWidth =
+        document.getElementById("chartContainer")?.offsetWidth || 500;
+      setWidthBar(containerWidth);
+    };
+
+    updateWidth();
+    window.addEventListener("resize", updateWidth);
+    return () => window.removeEventListener("resize", updateWidth);
+  }, []);
 
   useEffect(() => {
     const storeBook = getStorageBookApp("Read");
@@ -58,18 +61,7 @@ export const PageRead = () => {
     }
   }, [books]);
 
-  useEffect(() => {
-    const updateWidth = () => {
-      const containerWidth =
-        document.getElementById("chartContainer")?.offsetWidth || 500;
-      setWidthBar(containerWidth);
-    };
-
-    updateWidth();
-    window.addEventListener("resize", updateWidth);
-
-    return () => window.removeEventListener("resize", updateWidth);
-  }, []);
+  console.log(books);
   return (
     <div className="max-w-[1202px] mx-auto px-4 mt-8">
       <div className="bg-base-200 rounded-2xl lg:p-12">

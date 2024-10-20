@@ -1,17 +1,18 @@
-import { useEffect, useState } from "react";
 import Book from "./Book.jsx";
+import { useLoaderData } from "react-router-dom";
 
 export const AllBooks = () => {
-  const [BookData, setBookData] = useState([]);
-  useEffect(() => {
-    fetch("BookData.json")
-      .then((response) => {
-        return response.json();
-      })
-      .then((data) => {
-        setBookData(data);
-      });
-  }, []);
+  const BookData = useLoaderData();
+  // const [BookData, setBookData] = useState([]);
+  // useEffect(() => {
+  //   fetch("BookData.json")
+  //     .then((response) => {
+  //       return response.json();
+  //     })
+  //     .then((data) => {
+  //       setBookData(data);
+  //     });
+  // }, []);
   return (
     <div className="mt-24">
       <h2 className="font-bold text-4xl text-Primary dark:text-Primary-dark font-Playfair text-center">
